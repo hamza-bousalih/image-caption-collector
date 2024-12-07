@@ -1,8 +1,8 @@
 import requests
-from collector import APIBase
+from collector import BasePlatform
 from config import PIXLR_MAX_ITERATON
 
-class PixlrAPI(APIBase):
+class PixlrPlatform(BasePlatform):
     def __init__(self, base_url: str, max_iteration: int):
         super().__init__(base_url, by_query=False, max_iteration=max_iteration)
         self.page = 1

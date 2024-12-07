@@ -1,7 +1,7 @@
 import requests
-from collector import APIBase
+from collector import BasePlatform
 
-class FreepikAPI(APIBase):
+class FreepikPlatform(BasePlatform):
     def __init__(self, base_url):
         super().__init__(base_url)
         self.page = 1

@@ -1,22 +1,22 @@
 from typing import List, Tuple
 from cleaner import concatenate_files
-from collector import SUPPORTED_PLATFORM, APIBase
+from collector import SUPPORTED_PLATFORM, BasePlatform
 from config import SEARCH_PROMPTS, PLATFORMS
 
 search_prompts = SEARCH_PROMPTS.split(";")
 
-def filter_platforms() -> Tuple[List[APIBase], List[APIBase]]:
+def filter_platforms() -> Tuple[List[BasePlatform], List[BasePlatform]]:
     global PLATFORMS
     
-    queried_platforms: List[APIBase] = []
-    simple_platforms: List[APIBase] = []
+    queried_platforms: List[BasePlatform] = []
+    simple_platforms: List[BasePlatform] = []
 
     if len(PLATFORMS) == 0:
         raise RuntimeError("[400] no platform was provided! out")
 
     for p in PLATFORMS:
         pla = SUPPORTED_PLATFORM[p]
-        if pla is None and isinstance(pla, APIBase):
+        if pla is None and isinstance(pla, BasePlatform):
             print(f"[400] {p} is not supported")
             continue
         
@@ -25,12 +25,12 @@ def filter_platforms() -> Tuple[List[APIBase], List[APIBase]]:
     
     return queried_platforms, simple_platforms
 
-def collect_by_query(api: APIBase, q: str):
+def collect_by_query(api: BasePlatform, q: str):
     api.reset()
     api.set_query(q)
     api.execute()
 
-def collect_simple(api: APIBase):
+def collect_simple(api: BasePlatform):
     api.reset()
     api.execute()
 

@@ -7,7 +7,7 @@ from datetime import datetime
 import re
 from config import COLLECTED_DIR, CONSIDER_MAX_ITERATON, MAX_ITERATON, WATING, TRY_MANY
 
-class APIBase(ABC):
+class BasePlatform(ABC):
     def __init__(self, base_url, cookies_str="", max_iteration=MAX_ITERATON, by_query=True):
         self.query = ""
         self.by_query = by_query

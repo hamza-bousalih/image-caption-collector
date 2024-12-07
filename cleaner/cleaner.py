@@ -1,11 +1,11 @@
-from collector import APIBase
+from collector import BasePlatform
 import os
 import pandas as pd
 from datetime import datetime
 from config import COLLECTED_DIR
 
-def concatenate_files(collector: APIBase):
-    dir_path = collector.dir()
+def concatenate_files(platform: BasePlatform):
+    dir_path = platform.dir()
     
     if os.path.exists(dir_path) and os.path.isdir(dir_path):
         print(f"Cleaning directory: {dir_path}")
@@ -29,7 +29,7 @@ def concatenate_files(collector: APIBase):
         
         if not combined_data.empty:
             time = datetime.now().strftime("%Y%m%d_%H%M%S_%f")[:-3]
-            output_file = os.path.join(COLLECTED_DIR, f"{collector.name()}_data_{time}.csv")
+            output_file = os.path.join(COLLECTED_DIR, f"{platform.name()}_data_{time}.csv")
             
             try:
                 combined_data.to_csv(output_file, index=False)
